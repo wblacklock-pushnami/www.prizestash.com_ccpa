@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>California Consumer Privacy Rights — PrizeStash</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d4ed8'/%3E%3Ctext x='50%25' y='52%25' font-family='Arial,sans-serif' font-size='38' font-weight='800' fill='white' text-anchor='middle' dominant-baseline='middle'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mada:wght@500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --push-purple: #5C3DE4;
+      --dark-purple: #312679;
+      --clear: #F1F1F1;
+      --ink: #1E1E1F;
+      --ink-2: #4a4a4d;
+      --line: #d2d6e0;
+      --surface: #FFFFFF;
+      --purple-tint: #e6e2f8;
+      --link-blue: #1d4ed8;
+      --link-blue-dark: #1e3a8a;
+      --blue-tint: #dbeafe;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; background: var(--surface); }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--clear);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .layout, .simple-layout { flex: 1 0 auto; }
+    .site-footer { flex-shrink: 0; }
+    h1, h2, h3 { font-family: 'Mada', sans-serif; margin: 0 0 12px; line-height: 1.25; color: var(--ink); }
+    p, li { margin: 0 0 16px; }
+    a { color: var(--link-blue); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--link-blue-dark); }
+    a:focus-visible { outline: 2px solid var(--link-blue); outline-offset: 2px; border-radius: 4px; }
+    main a { color: var(--link-blue); }
+    main a:hover { color: var(--link-blue-dark); }
+
+    .skip-link {
+      position: absolute; left: -999px; top: 0;
+      background: var(--push-purple); color: white;
+      padding: 8px 12px; border-radius: 8px; z-index: 100; font-weight: 600;
+    }
+    .skip-link:focus { left: 8px; top: 8px; }
+
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      height: 64px;
+      display: flex; align-items: center;
+    }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      padding: 0 24px;
+      display: flex; align-items: center;
+    }
+    .brand {
+      font-family: 'Mada', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .brand:hover { color: var(--ink); }
+
+    /* Layout */
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+    }
+    .toc {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+    .toc h2 {
+      font-family: 'Mada', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin: 0 0 12px;
+    }
+    .toc ol { list-style: none; padding: 0; margin: 0; }
+    .toc li { margin: 0 0 4px; }
+    .toc a {
+      display: block;
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--ink-2);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 6px 6px 0;
+      transition: all 0.15s;
+    }
+    .toc a:hover,
+    .toc a:focus-visible {
+      color: var(--link-blue);
+      background: var(--blue-tint);
+      border-left-color: var(--link-blue);
+    }
+
+    article {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 40px 36px;
+      max-width: 720px;
+    }
+    article > h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      margin: 0 0 24px;
+      letter-spacing: -0.01em;
+      text-align: left;
+    }
+    article section { margin-bottom: 32px; scroll-margin-top: 80px; }
+    article section:last-child { margin-bottom: 0; }
+    article h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      padding-top: 8px;
+    }
+    article h3 { font-size: 17px; font-weight: 600; margin-top: 20px; }
+    article p, article li { color: var(--ink); line-height: 1.65; }
+    article ul, article ol { padding-left: 22px; margin-bottom: 16px; }
+    article li { margin-bottom: 6px; }
+
+    /* Data tables (e.g. CCPA category table) */
+    article .table-wrap { overflow-x: auto; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 8px; }
+    article table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+    article table th, article table td {
+      text-align: left; vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      line-height: 1.5;
+    }
+    article table tr:last-child th, article table tr:last-child td { border-bottom: none; }
+    article table thead th {
+      background: #f6f7fb;
+      font-family: 'Mada', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    article table tbody th { font-family: 'Mada', sans-serif; font-weight: 600; color: var(--ink); width: 26%; }
+    article table .collected { text-align: center; width: 90px; font-family: 'Mada', sans-serif; font-weight: 700; }
+    article table .collected.yes { color: #1cb526; }
+    article table .collected.no { color: #a3a3a8; }
+    @media (max-width: 640px) {
+      article table { font-size: 13px; }
+      article table th, article table td { padding: 10px 10px; }
+    }
+    article .intro {
+      font-size: 17px;
+      color: var(--ink);
+      padding: 16px 20px;
+      background: var(--purple-tint);
+      border-radius: 8px;
+      border-left: 3px solid var(--push-purple);
+      margin-bottom: 24px;
+    }
+    .contact-block {
+      padding: 16px 20px;
+      background: var(--purple-tint);
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+    .contact-block p { margin: 0 0 4px; }
+
+    /* Form success state */
+    .form-success {
+      text-align: center;
+      padding: 24px 0;
+    }
+    .form-success__check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      background: #1cb526;
+      border-radius: 50%;
+      margin-bottom: 16px;
+    }
+    .form-success__check svg { width: 36px; height: 36px; }
+    .form-success h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    .form-success p { color: var(--ink-2); }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 24px;
+      background: var(--surface);
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 12px; align-items: center; text-align: center;
+    }
+    .footer-inner p { margin: 0; font-size: 13px; color: var(--ink-2); }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; }
+    .footer-links a {
+      color: var(--ink-2); text-decoration: none;
+      padding: 0 12px; border-right: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .footer-links a:last-child { border-right: none; }
+    .footer-links a:hover { color: var(--link-blue); }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; gap: 0; padding: 24px 16px 48px; }
+      .toc { display: none; }
+      article { padding: 28px 22px; border-radius: 12px; }
+    }
+</style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://www.prizestash.com/" class="brand">PrizeStash</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="toc" aria-label="Table of contents">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#purpose">1. Purpose and General Principles.</a></li>
+        <li><a href="#right-to-know">2. Your Right to Know About Personal Information Collected, Used, Disclosed or Sold by www.PrizeStash.com.</a></li>
+        <li><a href="#right-to-delete">3. Your Right to Request Deletion of Personal Information.</a></li>
+        <li><a href="#submitting-requests">4. Instructions for Submitting a Verifiable Consumer Request to Know or a Verifiable Request to Delete.</a></li>
+        <li><a href="#right-to-opt-out">5. Your Right to Opt-Out of the Sale of Personal Information.</a></li>
+        <li><a href="#non-discrimination">6. www.PrizeStash.com Will Not Discriminate Against You for Exercising Your Privacy Rights.</a></li>
+        <li><a href="#authorized-agent">7. Authorized Agent.</a></li>
+        <li><a href="#contact">8. Contact for More Information.</a></li>
+      </ol>
+    </aside>
+
+    <main id="main">
+      <article>
+        <h1>California Consumer Privacy Rights</h1>
+
+      <section id="purpose">
+        <h2>1. Purpose and General Principles.</h2>
+
+        <p>The purpose of this California-specific Statement of Consumer Privacy Rights (&ldquo;Statement&rdquo;) is to provide California Consumers with a description of the rights of California Consumers regarding their Personal Information under the California Consumer Privacy Act (&ldquo;CCPA&rdquo;)</p>
+        <p>This Statement is intended to be read together with www.PrizeStash.com&rsquo;s Privacy Policy, which sets forth a description of www.PrizeStash.com&rsquo;s online and offline practices regarding the collection, use, disclosure and sale of Personal Information pertaining to consumers, including California Consumers. References in this Statement to the &ldquo;Privacy Policy&rdquo; refer to the Privacy Policy available at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+        <p>This Statement applies only to persons who are residents of the State of California (including those who call California &ldquo;home&rdquo; but are outside the state for a temporary or transitory purpose), referred to herein as California Consumers. It does not otherwise apply to persons who live in other states, and the rights and privileges set forth in this Statement are not available to such other persons.</p>
+        <p>For the purposes of CCPA and this Statement, the words &ldquo;Sell,&rdquo; &ldquo;Selling,&rdquo; &ldquo;Sale&rdquo; or &ldquo;Sold&rdquo; are defined broadly to mean selling, renting, releasing, disclosing, disseminating, making available, transferring or otherwise communicating the Personal Information of a California Consumer to another person for money or other valuable consideration.</p>
+        <p>This Statement was last updated on January 1, 2020.</p>
+    
+      </section>
+      <section id="right-to-know">
+        <h2>2. Your Right to Know About Personal Information Collected, Used, Disclosed or Sold by www.PrizeStash.com.</h2>
+
+        <p>California Consumers have the right to know about the Personal Information that www.PrizeStash.com collects, uses, discloses, and Sells. This is sometimes called the &ldquo;Right to Know.&rdquo;</p>
+        <p>For instructions on submitting a Request to Know, a description of the process www.PrizeStash.com will use to verify your request and any information you will have to provide in support of such a verified request, see Section 4.</p>
+
+        <h3>www.PrizeStash.com&rsquo;s Collection, Sources, Uses and Sale of Personal Information.</h3>
+        <p>www.PrizeStash.com has obtained or collected Personal Information about California Consumers for the business and commercial purposes described in Section 1 of the Privacy Policy available at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+        <p>www.PrizeStash.com has obtained or collected Personal Information about California Consumers from sources in the categories described in Section 2 of the Privacy Policy available at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+        <p>www.PrizeStash.com collects Personal Information about California Consumers in the categories described in Section 3 of the Privacy Policy available at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+        <p>www.PrizeStash.com has shared Personal Information about California Consumers with third parties in the following categories described in Section 4 of the Privacy Policy available at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+
+        <h3>Disclosure or Sale of Personal Information.</h3>
+        <p>www.PrizeStash.com has not disclosed or sold Personal Information about California Consumers to third parties for business and commercial purposes in the last 12 months.</p>
+        <p>www.PrizeStash.com does not knowingly collect or sell the Personal Information of persons under 16 years of age.</p>
+        <p>The table below lists, for each category of Personal Information collected, the (i) categories of sources from which it was collected, (ii) the business or commercial purposes for which it was collected, and (iii) the categories of third parties with whom it was shared. In the table below, categories of consumer data, and categories of source, purpose and third-party sharing, are as described in the Privacy Policy at <a href="https://www.prizestash.com/privacy-policy/">https://www.prizestash.com/privacy-policy/</a> .</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Categories</th><th>Examples</th><th>Collected</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>A. Identifiers.</th><td>A real name, alias, postal address, unique personal identifier, online identifier, Internet Protocol address, email address, account name, Social Security number, driver&rsquo;s license number, passport number, or other similar identifiers.</td><td class="collected yes">YES</td></tr>
+              <tr><th>B. Personal information categories listed in the California Customer Records statute (Cal. Civ. Code &sect; 1798.80(e)).</th><td>A name, signature, Social Security number, physical characteristics or description, address, telephone number, passport number, driver&rsquo;s license or state identification card number, insurance policy number, education, employment, employment history, bank account number, credit card number, debit card number, or any other financial information, medical information, or health insurance information. Some personal information included in this category may overlap with other categories.</td><td class="collected yes">YES</td></tr>
+              <tr><th>C. Protected classification characteristics under California or federal law.</th><td>Age (40 years or older), race, color, ancestry, national origin, citizenship, religion or creed, marital status, medical condition, physical or mental disability, sex (including gender, gender identity, gender expression, pregnancy or childbirth and related medical conditions), sexual orientation, veteran or military status, genetic information (including familial genetic information).</td><td class="collected no">NO</td></tr>
+              <tr><th>D. Commercial information.</th><td>Records of personal property, products or services purchased, obtained, or considered, or other purchasing or consuming histories or tendencies.</td><td class="collected no">NO</td></tr>
+              <tr><th>E. Biometric information.</th><td>Genetic, physiological, behavioral, and biological characteristics, or activity patterns used to extract a template or other identifier or identifying information, such as, fingerprints, faceprints, and voiceprints, iris or retina scans, keystroke, gait, or other physical patterns, and sleep, health, or exercise data.</td><td class="collected no">NO</td></tr>
+              <tr><th>F. Internet or other similar network activity.</th><td>Browsing history, search history, information on a consumer&rsquo;s interaction with a website, application, or advertisement.</td><td class="collected yes">YES</td></tr>
+              <tr><th>G. Geolocation data.</th><td>Physical location or movements.</td><td class="collected no">NO</td></tr>
+              <tr><th>H. Sensory data.</th><td>Audio, electronic, visual, thermal, olfactory, or similar information.</td><td class="collected no">NO</td></tr>
+              <tr><th>I. Professional or employment-related information.</th><td>Current or past job history or performance evaluations.</td><td class="collected no">NO</td></tr>
+              <tr><th>J. Non-public education information (per the Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).</th><td>Education records directly related to a student maintained by an educational institution or party acting on its behalf, such as grades, transcripts, class lists, student schedules, student identification codes, student financial information, or student disciplinary records.</td><td class="collected no">NO</td></tr>
+              <tr><th>K. Inferences drawn from other personal information.</th><td>Profile reflecting a person&rsquo;s preferences, characteristics, psychological trends, predispositions, behavior, attitudes, intelligence, abilities, and aptitudes.</td><td class="collected no">NO</td></tr>
+            </tbody>
+          </table>
+        </div>
+    
+      </section>
+      <section id="right-to-delete">
+        <h2>3. Your Right to Request Deletion of Personal Information.</h2>
+
+        <p>California Consumers have a right to request the deletion of their Personal Information collected or maintained by www.PrizeStash.com.</p>
+        <p>For instructions on submitting a Request to Delete, and a description of the process www.PrizeStash.com will use to verify your request, including any information you will have to provide in support of such a verified request, see Section 4 immediately below.</p>
+    
+      </section>
+      <section id="submitting-requests">
+        <h2>4. Instructions for Submitting a Verifiable Consumer Request to Know or a Verifiable Request to Delete.</h2>
+
+        <p>You can submit a Request to Know or a Request to Delete your Personal Information by taking the following actions:</p>
+        <p>For Request to Know : Click on the following link: <a href="https://www.prizestash.com/ccpa-rtd">https://www.prizestash.com/ccpa-rtd</a></p>
+        <p>For either request, complete the authentication required in order to verify your identity, which may include an affidavit.</p>
+        <p>Your Request to Know or Request to Delete will have to be verified before www.PrizeStash.com can act upon it. A verified Request to Know or Request to Delete is called a &ldquo;Verifiable Consumer Request&rdquo;. Upon successful submission of a Verifiable Consumer Request, www.PrizeStash.com will promptly begin working on your request. You will receive notification upon completion.</p>
+        <p><strong>NOTE:</strong> www.PrizeStash.com may retain the services of a third party to assist us with the validation process. Data submitted by you during the authentication process will not be provided to www.PrizeStash.com or retained by the third party.</p>
+    
+      </section>
+      <section id="right-to-opt-out">
+        <h2>5. Your Right to Opt-Out of the Sale of Personal Information.</h2>
+
+        <p>California Consumers have a right to opt-out of the sale of their Personal Information by www.PrizeStash.com. This is called the &ldquo;Right to Opt-out.&rdquo;</p>
+        <p>To exercise your Right to Opt-out, please complete and file the webform available at <a href="https://www.prizestash.com/ccpa-rta">https://www.prizestash.com/ccpa-rta</a></p>
+    
+      </section>
+      <section id="non-discrimination">
+        <h2>6. www.PrizeStash.com Will Not Discriminate Against You for Exercising Your Privacy Rights.</h2>
+
+        <p>California Consumers have a right to be free of discriminatory treatment by any business for exercising their privacy rights under the CCPA.</p>
+        <p>www.PrizeStash.com will not discriminate against you in any way, including but not limited to denying you goods or services available to others, charging you different prices or providing you with a different quality of goods or services.</p>
+    
+      </section>
+      <section id="authorized-agent">
+        <h2>7. Authorized Agent.</h2>
+
+        <p>California Consumers can authorize another person to make a request under the CCPA on the consumer&rsquo;s behalf.</p>
+        <p>You will have to provide written authorization to your Authorized Agent, and upon request either you or your Authorized Agent will have to provide written authorization to www.PrizeStash.com to verify your identity and their authority to act for you.</p>
+    
+      </section>
+      <section id="contact">
+        <h2>8. Contact for More Information.</h2>
+
+        <p>For questions or more information about your rights under the CCPA and this Statement of Consumer Privacy Rights, please contact: <a href="mailto:support@www.prizestash.com">support@www.prizestash.com</a>.</p>
+    
+      </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://www.prizestash.com/privacy-policy/">Privacy Policy</a>
+        <a href="https://www.prizestash.com/ccpa/">CCPA</a>
+        <a href="https://www.prizestash.com/official-rules/">Official Rules</a>
+      </div>
+      <p>© 2026 PrizeStash</p>
+    </div>
+  </footer>
+</body>
+</html>
